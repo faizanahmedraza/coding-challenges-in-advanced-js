@@ -72,7 +72,6 @@ function Video(title) {
   }
   const circle3 = new Circle(1);
 
-
 /*
  * Objects and understanding of this keyword
  * In JavaScript, the thing called this is the object that "owns" the code.
