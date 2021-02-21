@@ -281,3 +281,85 @@ function sum(a, b) {
 carname = "Volvo";
 alert(carname);
 var carname;
+
+/*Destructuring
+  you can extract data from arrays and objects into distinct variables using destructuring
+*/
+const circle = {
+  radius: 10,
+  color: 'orange',
+  getArea: function() {
+    return Math.PI * this.radius * this.radius;
+  },
+  getCircumference: function() {
+    return 2 * Math.PI * this.radius;
+  }
+};
+
+let {radius,getArea, getCircumference} = circle;
+console.log(getArea());
+const fruits = ["Apples","Bananas","Grapes","Orange"];
+let [a,b,c] = fruits;
+console.log(a,b,c);
+
+const car = {name: "Ferrari", model: "500"};
+let { name,model } = car;
+console.log(name,model);
+
+/*Object Literal Shorthand 
+  You’ve probably written code where an object is being 
+  initialized using the same property names as the variable names being assigned to them.
+*/
+let type = 'quartz';
+let color = 'rose';
+let carat = 21.29;
+
+// const gemzone = {
+//   type: type,
+//   color: color,
+//   carat: carat
+// }
+// same as
+const gemzone = { type,color,carat };
+console.log(gemzone.carat);
+
+
+/*Iteration:
+  Iterable protocol allows js to define or customize their iteration behavior
+  Note:
+  1-for..in returns a list of keys on the object being iterated
+  2-for..of returns a list of values of the numeric properties of the object being iterated.
+  */
+ const digits = [1, 2, 3, 4, 5, 10, 7, 8, 9, 6];
+
+
+ for (const index in digits) {
+   console.log(digits[index]);
+ }
+ 
+ for (const digit of digits) {
+   if (digit % 2 === 0) {
+     continue;
+   }
+   console.log(digit);
+ }
+ 
+ for (let i = 0; i < digits.length; i++) {
+   console.log(digits[i]);
+ }
+ 
+ digits.forEach(element => console.log(element));
+ 
+
+/*Spread Operator 
+  The Set object lets you store unique values of any type, whether primitive values or object references.
+*/
+const books = ["Don Quixote", "The Hobbit", "Alice in Wonderland", "Tale of Two Cities"];
+console.log(...books);
+const primes = new Set([2, 3, 5, 7, 11, 13, 17, {a:1, b:2}, 23, 29]);
+console.log(...primes);
+
+/*Rest Operator */
+const order = [20.17, 18.67, 1.50, "cheese", "eggs", "milk", "bread"];
+const [total, subtotal, tax, ...items] = order;
+console.log(total, subtotal, tax, items);
