@@ -158,3 +158,44 @@ var sharjeel = new Person("Sharjeel",1998,"Developer");
 var hur = new Person("Hur",1999,"Developer");
 
 
+/*Arrow Functions:
+  Array prototype methods: map and filter, find, findIndex, values, every
+*/
+const fruits = ["apple","mango","orange","banana","cherry","stawbery"];
+console.log(fruits);
+
+const mapFruits = fruits.map((fruit) => 'I like to eat '+fruit);
+for(let value of mapFruits){
+  document.write(value,'<br>');
+}
+
+const fiterFruits = fruits.filter((fruit) => {
+  if(fruit.endsWith('e')){
+    document.write(fruit," that ends with e letter.<br>");
+  }
+});
+
+const valueFruits = fruits.values();
+for(let value of valueFruits){
+  console.log(value);
+}
+
+/*
+The find() method returns the value of the first element in the array that satisfies the provided testing function
+The findIndex() method returns the index of the first element in the array that satisfies the provided testing function*/
+const secretNumbers = [12,11,7,3,6,2,10,13];
+
+const findSecretNumbers = secretNumbers.find((element) => element > 10);
+console.log(findSecretNumbers);
+
+
+/*The every() method tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value. */
+const isBelowThreshold = (currentValue) => currentValue < 40;
+const everySecretNumbers = secretNumbers.every(isBelowThreshold);//true
+
+/*he fill() method changes all elements in an array to a static value, from a start index (default 0) to an end index (default array.length). It returns the modified array. 
+  value, start, end
+*/
+
+const fillSecretNumbers = secretNumbers.fill(10,3,4);
+console.log(fillSecretNumbers);
