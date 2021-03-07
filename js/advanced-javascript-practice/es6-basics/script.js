@@ -24,44 +24,6 @@ var fullname = "John and Doe";
 console.log(fullname);
 
 /**
- * Variable mutation and type coercion
- */
-var firstname = "John";
-var age = 22;
-console.log(firstname + " " + age);
-
-var job, isMarried;
-job = "Developer";
-isMarried = false;
-
-console.log(
-  firstname +
-    " is a " +
-    age +
-    " years old. Its job is " +
-    job +
-    ". Is he Married? " +
-    isMarried
-);
-
-//variable mutation
-age = "twenty two";
-job = "cadet";
-
-console.log(
-  firstname +
-    " is a " +
-    age +
-    " years old. Its job is " +
-    job +
-    ". Is he Married? " +
-    isMarried
-);
-
-// var lastname = prompt("Enter your Last name");
-// alert(firstname+' '+lastname);
-
-/**
  * Basic Operators
  */
 
@@ -363,3 +325,20 @@ console.log(...primes);
 const order = [20.17, 18.67, 1.50, "cheese", "eggs", "milk", "bread"];
 const [total, subtotal, tax, ...items] = order;
 console.log(total, subtotal, tax, items);
+
+/*Short Circuit using Logical Operator in JS*/
+function shortCircuitEvaluation() {
+  let givenAge = 20;
+  let age = givenAge && givenAge != '';
+  document.write(age);
+  document.write(typeof age);
+  if(age || typeof age === "boolean"){
+    document.writeln(`age is ${givenAge}.`);
+  }else if(typeof age === 'boolean' && age){
+    document.writeln(`age is less than and equal to 20.`);
+  }
+}
+shortCircuitEvaluation();
+
+document.write(false && false || true && false || false && true);//false
+document.write(true || false && true);//true
