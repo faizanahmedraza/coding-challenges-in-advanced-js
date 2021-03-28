@@ -1,7 +1,7 @@
-/*
+/*  TOPICS:
  * Functions , parameters, arguments , void and return functions
  * and Factory Functions
- * Note: 
+ * Note:
  * 1-We use came Notation like 'oneTwoThree' for factory Functions.
  * 2-We use Pascal Notation like 'OneTwoThree' for constructor Functions.
  */
@@ -52,25 +52,25 @@ console.log(circle2);
 /*
  * Constructor Functions --- ES6
  * In a constructor function this does not have a value.
- * It is a substitute for the new object. The value of 
+ * It is a substitute for the new object. The value of
  * this will become the new object when a new object is created.
  */
 function Video(title) {
-    this.title = title;
-    console.log(this); //this will reference to every new object that is created/instantiated
-  }
-  //when you use a new operator it creates a new empty object
-  const v = new Video("ABC");
-  const v1 = new Video("CDE");
-  
-  function Circle(radius) {
-      this.radius = radius;
-      this.draw = function() {
-          console.log('draw');
-      }
-      return this;
-  }
-  const circle3 = new Circle(1);
+  this.title = title;
+  console.log(this); //this will reference to every new object that is created/instantiated
+}
+//when you use a new operator it creates a new empty object
+const v = new Video("ABC");
+const v1 = new Video("CDE");
+
+function Circle(radius) {
+  this.radius = radius;
+  this.draw = function () {
+    console.log("draw");
+  };
+  return this;
+}
+const circle3 = new Circle(1);
 
 /*
  * Objects and understanding of this keyword
@@ -105,7 +105,6 @@ function playVideo() {
 }
 playVideo(); //return window object
 
-
 /*
 Prototypes are the mechanism by which JavaScript objects inherit features from one another.
 The Object.prototype is on the top of the prototype inheritance chain,
@@ -119,26 +118,26 @@ var student = {
 };
 
 var user = {
-    name: "Faizan Ahmed Raza",
-    email: "faizanahmedraza35@gmail.com"
+  name: "Faizan Ahmed Raza",
+  email: "faizanahmedraza35@gmail.com",
 };
 
-var User = function(user) {
-    this.name = user.name;
-    this.email = user.email;
-}
+var User = function (user) {
+  this.name = user.name;
+  this.email = user.email;
+};
 /*Functions are not longer inside the object 
 directly and it is in proto property of object*/
 
-User.prototype.login = function() {
-    this.online = true;
-    console.log(this.email, ' has logged in!');
-}
+User.prototype.login = function () {
+  this.online = true;
+  console.log(this.email, " has logged in!");
+};
 
-User.prototype.logout = function() {
-    this.online = true;
-    console.log(this.email, ' has logged out!');
-}
+User.prototype.logout = function () {
+  this.online = true;
+  console.log(this.email, " has logged out!");
+};
 
 var faizan = new User(user);
 faizan.login();
@@ -153,49 +152,141 @@ Person.prototype.calculateAge = function () {
   console.log(2021 - this.yearOfBirth);
 };
 
-var osama = new Person("Osama",1994,"Developer");
-var sharjeel = new Person("Sharjeel",1998,"Developer");
-var hur = new Person("Hur",1999,"Developer");
+var osama = new Person("Osama", 1994, "Developer");
+var sharjeel = new Person("Sharjeel", 1998, "Developer");
+var hur = new Person("Hur", 1999, "Developer");
+
+/*Functions: Passing Functions as arguments */
+
+const years = [1990, 1999, 1945, 1950, 2005];
+
+function arrayCalc(arr, func) {
+  let arrRes = [];
+  for (let i = 0; i < arr.length; i++) {
+    arrRes.push(func(arr[i]));
+  }
+  return arrRes;
+}
+
+function calcAge(arrElement) {
+  return 2021 - arrElement;
+}
+
+function isFullAge(arrElement) {
+  return arrElement >= 18;
+}
+
+function maxHeartRate(arrElement) {
+  if (arrElement >= 18 && arrElement <= 40) {
+    return 220 - arrElement;
+  } else if (arrElement >= 40) {
+    return Math.round(206.9 - 0.7 * arrElement);
+  } else {
+    return -1;
+  }
+}
+
+const ages = arrayCalc(years, calcAge);
+const fullAges = arrayCalc(years, isFullAge);
+const rates = arrayCalc(years, maxHeartRate);
+
+console.log(rates);
+console.log(fullAges);
+console.log(ages);
+
+/*Functions: Functions returning Functions */
+
+function hiringDepart(job) {
+  if (job.toLowerCase() === "designer") {
+    return function (name) {
+      console.log(name + ", Can you please describe the UX design?");
+    };
+  } else if (job.toLowerCase() === "teacher") {
+    return function (name) {
+      console.log(name + ", Which subject do you to teach?");
+    };
+  } else {
+    return function (name) {
+      console.log(name + ", What do you do?");
+    };
+  }
+}
+
+const interviewer01 = hiringDepart("teacher");
+interviewer01("Hur Abbas");
+// const interviewer02 = hiringDepart('designer')('Khubaib');
+// const interviewer03 = hiringDepart('matric')('XYZ');
+
+console.log(interviewer01);
+
+/*
+  Functions: IIFE(Immediately invoked function expression) 
+  is a JavaScript function that runs as soon as it is defined.
+
+  It is a design pattern which is also known as a Self-Executing Anonymous Function and contains two major parts:
+  1 - The first is the anonymous function with lexical scope enclosed within the Grouping Operator (). This prevents accessing variables within the IIFE idiom as well as polluting the global scope.
+  2 - The second part creates the immediately invoked function expression () through which the JavaScript engine will directly interpret the function.
+*/
+
+let iife = function () {
+  return "Immediately invoked function expression";
+}();
+console.log(iife);
+
+function playGame() {
+  let score = Math.random()*10;
+  console.log(score >= 5);
+}
+playGame();
+
+(function () {
+  let score = Math.random()*10;
+  console.log(score >= 5);
+})();
+
+(function (goodLuck) {
+  var score = Math.random()*10;
+  console.log(score >= 5 - goodLuck);
+})(5);
 
 
-/*Arrow Functions:
+/*Arrow Functions: behave same as normal but shorter syntax
   Array prototype methods: map and filter, find, findIndex, values, every
 */
-const fruits = ["apple","mango","orange","banana","cherry","stawbery"];
+const fruits = ["apple", "mango", "orange", "banana", "cherry", "stawbery"];
 console.log(fruits);
 
-const mapFruits = fruits.map((fruit) => 'I like to eat '+fruit);
-for(let value of mapFruits){
-  document.write(value,'<br>');
+const mapFruits = fruits.map((fruit) => "I like to eat " + fruit);
+for (let value of mapFruits) {
+  document.write(value, "<br>");
 }
 
 const fiterFruits = fruits.filter((fruit) => {
-  if(fruit.endsWith('e')){
-    document.write(fruit," that ends with e letter.<br>");
+  if (fruit.endsWith("e")) {
+    document.write(fruit, " that ends with e letter.<br>");
   }
 });
 
 const valueFruits = fruits.values();
-for(let value of valueFruits){
+for (let value of valueFruits) {
   console.log(value);
 }
 
 /*
 The find() method returns the value of the first element in the array that satisfies the provided testing function
 The findIndex() method returns the index of the first element in the array that satisfies the provided testing function*/
-const secretNumbers = [12,11,7,3,6,2,10,13];
+const secretNumbers = [12, 11, 7, 3, 6, 2, 10, 13];
 
 const findSecretNumbers = secretNumbers.find((element) => element > 10);
 console.log(findSecretNumbers);
 
-
 /*The every() method tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value. */
 const isBelowThreshold = (currentValue) => currentValue < 40;
-const everySecretNumbers = secretNumbers.every(isBelowThreshold);//true
+const everySecretNumbers = secretNumbers.every(isBelowThreshold); //true
 
 /*he fill() method changes all elements in an array to a static value, from a start index (default 0) to an end index (default array.length). It returns the modified array. 
   value, start, end
 */
 
-const fillSecretNumbers = secretNumbers.fill(10,3,4);
+const fillSecretNumbers = secretNumbers.fill(10, 3, 4);
 console.log(fillSecretNumbers);
