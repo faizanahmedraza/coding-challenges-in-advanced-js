@@ -250,6 +250,11 @@ var carname;
 const circle = {
   radius: 10,
   color: 'orange',
+  belongs: {
+    shapes: {
+      edges: 0
+    }
+  },
   getArea: function() {
     return Math.PI * this.radius * this.radius;
   },
@@ -258,8 +263,8 @@ const circle = {
   }
 };
 
-let {radius,getArea, getCircumference} = circle;
-console.log(getArea());
+let {radius,belongs: {shapes: {edges: numOfEdges}},getArea, getCircumference} = circle;
+console.log(radius,numOfEdges,getArea());
 const fruits = ["Apples","Bananas","Grapes","Orange"];
 let [a,b,c] = fruits;
 console.log(a,b,c);
